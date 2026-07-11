@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../data/crayola_colors.dart';
 import '../services/ad_service.dart';
+import '../services/audio_service.dart';
 import '../services/settings_service.dart';
 import '../services/storage_service.dart';
 import '../widgets/language_settings_dialog.dart';
@@ -9,12 +10,14 @@ import 'game_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   final AdService adService;
+  final AudioService audio;
   final StorageService storage;
   final SettingsService settings;
 
   const HomeScreen({
     super.key,
     required this.adService,
+    required this.audio,
     required this.storage,
     required this.settings,
   });
@@ -42,6 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
       MaterialPageRoute(
         builder: (_) => GameScreen(
           adService: widget.adService,
+          audio: widget.audio,
           settings: widget.settings,
         ),
       ),
@@ -63,12 +67,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   alignment: AlignmentDirectional.topEnd,
                   child: Padding(
                     padding: const EdgeInsets.all(8),
-                    child: IconButton(
-                      icon: const Icon(Icons.language),
-                      iconSize: 28,
-                      tooltip: s.settingsTitle,
-                      onPressed: () =>
-                          showLanguageSettingsDialog(context, widget.settings),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          icon: Icon(
+                            widget.settings.soundEnabled
+                                ? Icons.volume_up
+                                : Icons.volume_off,
+                          ),
+                          iconSize: 28,
+                          tooltip: s.soundEffectsLabel,
+                          onPressed: widget.settings.toggleSound,
+                        ),
+                        IconButton(
+                          icon: const Icon(Icons.language),
+                          iconSize: 28,
+                          tooltip: s.settingsTitle,
+                          onPressed: () => showLanguageSettingsDialog(
+                            context,
+                            widget.settings,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -80,9 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const SizedBox(height: 32),
                       Text(
                         s.appTitle,
-                        style: Theme.of(context)
-                            .textTheme
-                            .displaySmall
+                        style: Theme.of(context).textTheme.displaySmall
                             ?.copyWith(fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(height: 12),
@@ -96,9 +115,13 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPressed: _startGame,
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 40, vertical: 12),
-                          child: Text(s.start,
-                              style: const TextStyle(fontSize: 20)),
+                            horizontal: 40,
+                            vertical: 12,
+                          ),
+                          child: Text(
+                            s.start,
+                            style: const TextStyle(fontSize: 20),
+                          ),
                         ),
                       ),
                       const SizedBox(height: 24),

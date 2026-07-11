@@ -1,6 +1,6 @@
-# CLAUDE.md
+# AGENTS.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
 
 ## Project
 
@@ -30,10 +30,6 @@ The core loop lives in two pure-logic files, deliberately free of widget code so
 `_GameScreenState._onGameStateChanged` is the bridge between the state machine and navigation/dialogs: it listens on the controller and reacts to reviveOffer (revive dialog → ad), gameOver, and victory phases, guarded by `_handlingPhase` against re-entry.
 
 **Ads**: `lib/services/ad_service.dart` defines the abstract `AdService` boundary; only `MockAdService` (fake 3-second ad) exists so far. A real google_mobile_ads implementation should swap in without touching game logic. The revive is one-per-run and requires watching the rewarded ad to completion.
-
-**Audio**: `lib/services/audio_service.dart` — `AudioService` is a const no-op base (default in tests and `ColorSpotApp`); `GameAudioService` is the real one, built on audioplayers only (a looping music player + a low-latency SFX player — don't add a second audio package). One `SettingsService` toggle (`soundEnabled`, deliberately unified) covers music and effects; the mute buttons on the home screen and game top bar call `toggleSound`. SFX are driven solely by `GamePhase` transitions in `_GameScreenState._playPhaseSound` — never play sounds from tap handlers, so audio can't disagree with game logic. `gameOver`/`reviveOffer` are deliberately silent (the failure sound already played during the preceding `failFeedback`). Music pauses while the app is backgrounded and respects the iOS silent switch.
-
-The background track `assets/audio/color_spot_theme.wav` is the original theme slowed to 0.85x (mono, pitch lowered). `tool/generate_theme.py` (pure-stdlib Python synth) can generate an alternative seamless melody-only loop onto a circular buffer — currently unused, kept for iteration.
 
 ## Localization (hand-rolled, two layers)
 

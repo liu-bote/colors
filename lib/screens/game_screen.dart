@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../logic/game_controller.dart';
 import '../logic/level_generator.dart';
 import '../services/ad_service.dart';
+import '../services/audio_service.dart';
 import '../services/settings_service.dart';
 import '../services/storage_service.dart';
 import '../widgets/color_grid.dart';
@@ -11,11 +12,13 @@ import 'victory_screen.dart';
 
 class GameScreen extends StatefulWidget {
   final AdService adService;
+  final AudioService audio;
   final SettingsService settings;
 
   const GameScreen({
     super.key,
     required this.adService,
+    required this.audio,
     required this.settings,
   });
 
@@ -26,6 +29,7 @@ class GameScreen extends StatefulWidget {
 class _GameScreenState extends State<GameScreen> {
   late final GameController _controller;
   bool _handlingPhase = false;
+  GamePhase? _lastSoundPhase;
 
   @override
   void initState() {
@@ -43,7 +47,9 @@ class _GameScreenState extends State<GameScreen> {
 
   Future<void> _onGameStateChanged() async {
     final phase = _controller.phase;
-    final needsHandling = phase == GamePhase.reviveOffer ||
+    _playPhaseSound(phase);
+    final needsHandling =
+        phase == GamePhase.reviveOffer ||
         phase == GamePhase.gameOver ||
         phase == GamePhase.victory;
     if (!needsHandling || _handlingPhase || !mounted) return;
@@ -68,6 +74,30 @@ class _GameScreenState extends State<GameScreen> {
     }
   }
 
+  /// Sounds follow the controller's phase so audio can never disagree with
+  /// the actual game outcome. gameOver and reviveOffer stay silent: the
+  /// failure sound already played during the failFeedback that led there.
+  void _playPhaseSound(GamePhase phase) {
+    if (_lastSoundPhase == phase) return;
+    _lastSoundPhase = phase;
+    switch (phase) {
+      case GamePhase.levelCleared:
+        widget.audio.playCorrectTap();
+      case GamePhase.failFeedback:
+        if (_controller.lastFail == FailReason.timeout) {
+          widget.audio.playFailure();
+        } else {
+          widget.audio.playWrongTap();
+        }
+      case GamePhase.victory:
+        widget.audio.playVictory();
+      case GamePhase.playing:
+      case GamePhase.reviveOffer:
+      case GamePhase.gameOver:
+        break;
+    }
+  }
+
   Future<void> _handleReviveOffer() async {
     final wantsAd = await showReviveDialog(context, widget.settings.strings);
     if (!mounted) return;
@@ -86,7 +116,10 @@ class _GameScreenState extends State<GameScreen> {
 
   Future<void> _handleGameOver() async {
     final retry = await showGameOverDialog(
-        context, widget.settings.strings, _controller.level);
+      context,
+      widget.settings.strings,
+      _controller.level,
+    );
     if (!mounted) return;
     if (retry) {
       _controller.startNewGame();
@@ -171,8 +204,10 @@ class _TopBar extends StatelessWidget {
         ),
         Expanded(
           child: Text(
-            settings.strings
-                .levelLabel(controller.level, LevelGenerator.maxLevel),
+            settings.strings.levelLabel(
+              controller.level,
+              LevelGenerator.maxLevel,
+            ),
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleLarge,
           ),
@@ -183,7 +218,14 @@ class _TopBar extends StatelessWidget {
             color: Colors.redAccent,
             size: 26,
           ),
-        const SizedBox(width: 8),
+        const SizedBox(width: 4),
+        IconButton(
+          icon: Icon(
+            settings.soundEnabled ? Icons.volume_up : Icons.volume_off,
+          ),
+          tooltip: settings.strings.soundEffectsLabel,
+          onPressed: settings.toggleSound,
+        ),
       ],
     );
   }
@@ -221,8 +263,9 @@ class _ColorNameCard extends StatelessWidget {
     final crayola = controller.board.crayola;
     final primaryName = crayola.nameIn(settings.primaryLang);
     final secondaryLang = settings.secondaryLang;
-    final secondaryName =
-        secondaryLang == null ? null : crayola.nameIn(secondaryLang);
+    final secondaryName = secondaryLang == null
+        ? null
+        : crayola.nameIn(secondaryLang);
 
     // Tablets get comfortably larger text than the theme's phone-sized
     // titleMedium/bodySmall, which reads tiny on a 10" portrait screen.
@@ -230,7 +273,10 @@ class _ColorNameCard extends StatelessWidget {
     final scale = shortestSide >= 600 ? 1.5 : 1.0;
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20 * scale, vertical: 12 * scale),
+      padding: EdgeInsets.symmetric(
+        horizontal: 20 * scale,
+        vertical: 12 * scale,
+      ),
       decoration: BoxDecoration(
         color: Colors.white.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(16),
@@ -261,10 +307,7 @@ class _ColorNameCard extends StatelessWidget {
               if (secondaryName != null && secondaryName != primaryName)
                 Text(
                   secondaryName,
-                  style: TextStyle(
-                    fontSize: 15 * scale,
-                    color: Colors.white70,
-                  ),
+                  style: TextStyle(fontSize: 15 * scale, color: Colors.white70),
                 ),
             ],
           ),

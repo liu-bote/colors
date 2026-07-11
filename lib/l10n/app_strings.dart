@@ -64,6 +64,8 @@ class AppStrings {
   final String languageLabel;
   final String secondLanguageLabel;
   final String secondLanguageHint;
+  final String musicLabel;
+  final String soundEffectsLabel;
   final String none;
   final String done;
 
@@ -92,6 +94,8 @@ class AppStrings {
     required this.languageLabel,
     required this.secondLanguageLabel,
     required this.secondLanguageHint,
+    required this.musicLabel,
+    required this.soundEffectsLabel,
     required this.none,
     required this.done,
   });
@@ -149,11 +153,13 @@ final AppStrings _en = AppStrings(
   playAgain: 'Play again',
   victoryTitle: 'You did it!',
   victoryBody: (n) => 'You cleared all 100 levels\nand met $n Crayola colors!',
-  settingsTitle: 'Language',
+  settingsTitle: 'Settings',
   languageLabel: 'Language',
   secondLanguageLabel: 'Second language (learning)',
   secondLanguageHint:
       'Shown under each color name to help learn a new language.',
+  musicLabel: 'Music',
+  soundEffectsLabel: 'Sound',
   none: 'None',
   done: 'Done',
 );
@@ -179,10 +185,12 @@ final AppStrings _zh = AppStrings(
   playAgain: '再来一局',
   victoryTitle: '恭喜通关！',
   victoryBody: (n) => '你完成了全部 100 关，\n还认识了 $n 种 Crayola 颜色！',
-  settingsTitle: '语言',
+  settingsTitle: '设置',
   languageLabel: '语言',
   secondLanguageLabel: '第二语言（学习）',
   secondLanguageHint: '会显示在颜色名字下方，帮助学习新语言。',
+  musicLabel: '背景音乐',
+  soundEffectsLabel: '声音',
   none: '无',
   done: '完成',
 );
@@ -212,11 +220,13 @@ final AppStrings _es = AppStrings(
   victoryTitle: '¡Lo lograste!',
   victoryBody: (n) =>
       '¡Superaste los 100 niveles\ny conociste $n colores Crayola!',
-  settingsTitle: 'Idioma',
+  settingsTitle: 'Ajustes',
   languageLabel: 'Idioma',
   secondLanguageLabel: 'Segundo idioma (aprendizaje)',
   secondLanguageHint:
       'Se muestra debajo de cada nombre de color para aprender un idioma nuevo.',
+  musicLabel: 'Música',
+  soundEffectsLabel: 'Sonido',
   none: 'Ninguno',
   done: 'Listo',
 );
@@ -246,11 +256,13 @@ final AppStrings _fr = AppStrings(
   victoryTitle: 'Bravo !',
   victoryBody: (n) =>
       'Tu as réussi les 100 niveaux\net découvert $n couleurs Crayola !',
-  settingsTitle: 'Langue',
+  settingsTitle: 'Réglages',
   languageLabel: 'Langue',
   secondLanguageLabel: 'Deuxième langue (apprentissage)',
   secondLanguageHint:
       'Affichée sous chaque nom de couleur pour apprendre une nouvelle langue.',
+  musicLabel: 'Musique',
+  soundEffectsLabel: 'Son',
   none: 'Aucune',
   done: 'OK',
 );
@@ -280,11 +292,13 @@ final AppStrings _de = AppStrings(
   victoryTitle: 'Geschafft!',
   victoryBody: (n) =>
       'Du hast alle 100 Level geschafft\nund $n Crayola-Farben kennengelernt!',
-  settingsTitle: 'Sprache',
+  settingsTitle: 'Einstellungen',
   languageLabel: 'Sprache',
   secondLanguageLabel: 'Zweite Sprache (Lernen)',
   secondLanguageHint:
       'Wird unter jedem Farbnamen angezeigt, um eine neue Sprache zu lernen.',
+  musicLabel: 'Musik',
+  soundEffectsLabel: 'Ton',
   none: 'Keine',
   done: 'Fertig',
 );
@@ -312,10 +326,12 @@ final AppStrings _ja = AppStrings(
   playAgain: 'もういちど',
   victoryTitle: 'クリアおめでとう！',
   victoryBody: (n) => '100レベル ぜんぶクリア！\n$n しょくの クレヨラのいろを おぼえたよ！',
-  settingsTitle: 'ことば',
+  settingsTitle: 'せってい',
   languageLabel: 'ことば',
   secondLanguageLabel: 'ふたつめのことば（がくしゅう）',
   secondLanguageHint: 'いろのなまえのしたに ひょうじされて、あたらしいことばをおぼえられるよ。',
+  musicLabel: 'おんがく',
+  soundEffectsLabel: 'おと',
   none: 'なし',
   done: 'できた',
 );
@@ -343,10 +359,12 @@ final AppStrings _ko = AppStrings(
   playAgain: '한 판 더',
   victoryTitle: '축하해요!',
   victoryBody: (n) => '100단계를 모두 통과하고\n크레욜라 색깔 $n가지를 배웠어요!',
-  settingsTitle: '언어',
+  settingsTitle: '설정',
   languageLabel: '언어',
   secondLanguageLabel: '두 번째 언어 (학습)',
   secondLanguageHint: '색깔 이름 아래에 표시되어 새로운 언어를 배울 수 있어요.',
+  musicLabel: '음악',
+  soundEffectsLabel: '소리',
   none: '없음',
   done: '완료',
 );
@@ -372,10 +390,12 @@ final AppStrings _zhHant = AppStrings(
   playAgain: '再來一局',
   victoryTitle: '恭喜通關！',
   victoryBody: (n) => '你完成了全部 100 關，\n還認識了 $n 種 Crayola 顏色！',
-  settingsTitle: '語言',
+  settingsTitle: '設定',
   languageLabel: '語言',
   secondLanguageLabel: '第二語言（學習）',
   secondLanguageHint: '會顯示在顏色名字下方，幫助學習新語言。',
+  musicLabel: '背景音樂',
+  soundEffectsLabel: '聲音',
   none: '無',
   done: '完成',
 );
@@ -404,11 +424,13 @@ final AppStrings _pt = AppStrings(
   playAgain: 'Jogar de novo',
   victoryTitle: 'Você conseguiu!',
   victoryBody: (n) => 'Você venceu os 100 níveis\ne conheceu $n cores Crayola!',
-  settingsTitle: 'Idioma',
+  settingsTitle: 'Configurações',
   languageLabel: 'Idioma',
   secondLanguageLabel: 'Segundo idioma (aprendizado)',
   secondLanguageHint:
       'Aparece abaixo de cada nome de cor para ajudar a aprender um idioma novo.',
+  musicLabel: 'Música',
+  soundEffectsLabel: 'Som',
   none: 'Nenhum',
   done: 'Pronto',
 );
@@ -438,11 +460,13 @@ final AppStrings _it = AppStrings(
   victoryTitle: 'Ce l\'hai fatta!',
   victoryBody: (n) =>
       'Hai superato tutti i 100 livelli\ne conosciuto $n colori Crayola!',
-  settingsTitle: 'Lingua',
+  settingsTitle: 'Impostazioni',
   languageLabel: 'Lingua',
   secondLanguageLabel: 'Seconda lingua (apprendimento)',
   secondLanguageHint:
       'Mostrata sotto ogni nome di colore per imparare una nuova lingua.',
+  musicLabel: 'Musica',
+  soundEffectsLabel: 'Audio',
   none: 'Nessuna',
   done: 'Fatto',
 );
@@ -472,11 +496,13 @@ final AppStrings _nl = AppStrings(
   victoryTitle: 'Gelukt!',
   victoryBody: (n) =>
       'Je hebt alle 100 levels gehaald\nen $n Crayola-kleuren leren kennen!',
-  settingsTitle: 'Taal',
+  settingsTitle: 'Instellingen',
   languageLabel: 'Taal',
   secondLanguageLabel: 'Tweede taal (leren)',
   secondLanguageHint:
       'Wordt onder elke kleurnaam getoond om een nieuwe taal te leren.',
+  musicLabel: 'Muziek',
+  soundEffectsLabel: 'Geluid',
   none: 'Geen',
   done: 'Klaar',
 );
@@ -505,11 +531,13 @@ final AppStrings _ru = AppStrings(
   playAgain: 'Ещё раз',
   victoryTitle: 'Получилось!',
   victoryBody: (n) => 'Ты прошёл все 100 уровней\nи узнал $n цветов Crayola!',
-  settingsTitle: 'Язык',
+  settingsTitle: 'Настройки',
   languageLabel: 'Язык',
   secondLanguageLabel: 'Второй язык (обучение)',
   secondLanguageHint:
       'Показывается под названием цвета, чтобы учить новый язык.',
+  musicLabel: 'Музыка',
+  soundEffectsLabel: 'Звук',
   none: 'Нет',
   done: 'Готово',
 );
@@ -539,11 +567,13 @@ final AppStrings _pl = AppStrings(
   victoryTitle: 'Udało się!',
   victoryBody: (n) =>
       'Ukończyłeś wszystkie 100 poziomów\ni poznałeś $n kolorów Crayola!',
-  settingsTitle: 'Język',
+  settingsTitle: 'Ustawienia',
   languageLabel: 'Język',
   secondLanguageLabel: 'Drugi język (nauka)',
   secondLanguageHint:
       'Wyświetlany pod nazwą koloru, aby pomóc w nauce nowego języka.',
+  musicLabel: 'Muzyka',
+  soundEffectsLabel: 'Dźwięk',
   none: 'Brak',
   done: 'Gotowe',
 );
@@ -573,11 +603,13 @@ final AppStrings _tr = AppStrings(
   victoryTitle: 'Başardın!',
   victoryBody: (n) =>
       '100 seviyenin hepsini geçtin\nve $n Crayola rengi öğrendin!',
-  settingsTitle: 'Dil',
+  settingsTitle: 'Ayarlar',
   languageLabel: 'Dil',
   secondLanguageLabel: 'İkinci dil (öğrenme)',
   secondLanguageHint:
       'Yeni bir dil öğrenmene yardımcı olmak için renk adının altında gösterilir.',
+  musicLabel: 'Müzik',
+  soundEffectsLabel: 'Ses',
   none: 'Yok',
   done: 'Tamam',
 );
@@ -607,10 +639,12 @@ final AppStrings _ar = AppStrings(
   victoryTitle: 'أحسنت!',
   victoryBody: (n) =>
       'أكملت المستويات المئة كلها\nوتعرّفت على $n لوناً من ألوان كرايولا!',
-  settingsTitle: 'اللغة',
+  settingsTitle: 'الإعدادات',
   languageLabel: 'اللغة',
   secondLanguageLabel: 'اللغة الثانية (للتعلّم)',
   secondLanguageHint: 'تظهر تحت اسم كل لون للمساعدة في تعلّم لغة جديدة.',
+  musicLabel: 'الموسيقى',
+  soundEffectsLabel: 'الصوت',
   none: 'بدون',
   done: 'تم',
 );
@@ -639,10 +673,12 @@ final AppStrings _hi = AppStrings(
   playAgain: 'फिर से खेलो',
   victoryTitle: 'कमाल कर दिया!',
   victoryBody: (n) => 'तुमने सभी 100 स्तर पार किए\nऔर $n Crayola रंग सीखे!',
-  settingsTitle: 'भाषा',
+  settingsTitle: 'सेटिंग्स',
   languageLabel: 'भाषा',
   secondLanguageLabel: 'दूसरी भाषा (सीखने के लिए)',
   secondLanguageHint: 'हर रंग के नाम के नीचे दिखती है ताकि नई भाषा सीख सको।',
+  musicLabel: 'संगीत',
+  soundEffectsLabel: 'ध्वनि',
   none: 'कोई नहीं',
   done: 'हो गया',
 );
@@ -672,11 +708,13 @@ final AppStrings _id = AppStrings(
   victoryTitle: 'Berhasil!',
   victoryBody: (n) =>
       'Kamu menyelesaikan 100 level\ndan mengenal $n warna Crayola!',
-  settingsTitle: 'Bahasa',
+  settingsTitle: 'Pengaturan',
   languageLabel: 'Bahasa',
   secondLanguageLabel: 'Bahasa kedua (belajar)',
   secondLanguageHint:
       'Ditampilkan di bawah nama warna untuk membantu belajar bahasa baru.',
+  musicLabel: 'Musik',
+  soundEffectsLabel: 'Suara',
   none: 'Tidak ada',
   done: 'Selesai',
 );
@@ -704,10 +742,12 @@ final AppStrings _th = AppStrings(
   playAgain: 'เล่นอีกครั้ง',
   victoryTitle: 'เก่งมาก!',
   victoryBody: (n) => 'คุณผ่านครบ 100 ด่าน\nและรู้จักสีเครโยลา $n สีแล้ว!',
-  settingsTitle: 'ภาษา',
+  settingsTitle: 'การตั้งค่า',
   languageLabel: 'ภาษา',
   secondLanguageLabel: 'ภาษาที่สอง (เพื่อเรียนรู้)',
   secondLanguageHint: 'แสดงใต้ชื่อสีแต่ละสีเพื่อช่วยเรียนภาษาใหม่',
+  musicLabel: 'เพลง',
+  soundEffectsLabel: 'เสียง',
   none: 'ไม่มี',
   done: 'เสร็จ',
 );
@@ -737,10 +777,12 @@ final AppStrings _vi = AppStrings(
   victoryTitle: 'Bạn làm được rồi!',
   victoryBody: (n) =>
       'Bạn đã vượt qua cả 100 cấp độ\nvà làm quen với $n màu Crayola!',
-  settingsTitle: 'Ngôn ngữ',
+  settingsTitle: 'Cài đặt',
   languageLabel: 'Ngôn ngữ',
   secondLanguageLabel: 'Ngôn ngữ thứ hai (học tập)',
   secondLanguageHint: 'Hiển thị dưới tên mỗi màu để giúp học một ngôn ngữ mới.',
+  musicLabel: 'Nhạc',
+  soundEffectsLabel: 'Âm thanh',
   none: 'Không',
   done: 'Xong',
 );
@@ -770,11 +812,13 @@ final AppStrings _sv = AppStrings(
   victoryTitle: 'Du klarade det!',
   victoryBody: (n) =>
       'Du klarade alla 100 nivåer\noch lärde känna $n Crayola-färger!',
-  settingsTitle: 'Språk',
+  settingsTitle: 'Inställningar',
   languageLabel: 'Språk',
   secondLanguageLabel: 'Andra språk (inlärning)',
   secondLanguageHint:
       'Visas under varje färgnamn för att hjälpa dig lära ett nytt språk.',
+  musicLabel: 'Musik',
+  soundEffectsLabel: 'Ljud',
   none: 'Inget',
   done: 'Klar',
 );
@@ -803,11 +847,13 @@ final AppStrings _da = AppStrings(
   victoryTitle: 'Du klarede det!',
   victoryBody: (n) =>
       'Du klarede alle 100 baner\nog lærte $n Crayola-farver at kende!',
-  settingsTitle: 'Sprog',
+  settingsTitle: 'Indstillinger',
   languageLabel: 'Sprog',
   secondLanguageLabel: 'Andet sprog (læring)',
   secondLanguageHint:
       'Vises under hvert farvenavn for at hjælpe med at lære et nyt sprog.',
+  musicLabel: 'Musik',
+  soundEffectsLabel: 'Lyd',
   none: 'Intet',
   done: 'Færdig',
 );
@@ -836,11 +882,13 @@ final AppStrings _no = AppStrings(
   victoryTitle: 'Du klarte det!',
   victoryBody: (n) =>
       'Du klarte alle 100 nivåer\nog ble kjent med $n Crayola-farger!',
-  settingsTitle: 'Språk',
+  settingsTitle: 'Innstillinger',
   languageLabel: 'Språk',
   secondLanguageLabel: 'Andrespråk (læring)',
   secondLanguageHint:
       'Vises under hvert fargenavn for å hjelpe deg å lære et nytt språk.',
+  musicLabel: 'Musikk',
+  soundEffectsLabel: 'Lyd',
   none: 'Ingen',
   done: 'Ferdig',
 );
@@ -869,11 +917,13 @@ final AppStrings _fi = AppStrings(
   playAgain: 'Pelaa uudelleen',
   victoryTitle: 'Sinä teit sen!',
   victoryBody: (n) => 'Selvitit kaikki 100 tasoa\nja opit $n Crayola-väriä!',
-  settingsTitle: 'Kieli',
+  settingsTitle: 'Asetukset',
   languageLabel: 'Kieli',
   secondLanguageLabel: 'Toinen kieli (oppiminen)',
   secondLanguageHint:
       'Näytetään jokaisen värin nimen alla auttamassa uuden kielen oppimisessa.',
+  musicLabel: 'Musiikki',
+  soundEffectsLabel: 'Ääni',
   none: 'Ei mitään',
   done: 'Valmis',
 );

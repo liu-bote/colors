@@ -23,8 +23,10 @@ Future<void> showLanguageSettingsDialog(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(s.languageLabel,
-                    style: Theme.of(context).textTheme.labelLarge),
+                Text(
+                  s.languageLabel,
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 8,
@@ -39,8 +41,10 @@ Future<void> showLanguageSettingsDialog(
                   ],
                 ),
                 const SizedBox(height: 24),
-                Text(s.secondLanguageLabel,
-                    style: Theme.of(context).textTheme.labelLarge),
+                Text(
+                  s.secondLanguageLabel,
+                  style: Theme.of(context).textTheme.labelLarge,
+                ),
                 const SizedBox(height: 4),
                 Text(
                   s.secondLanguageHint,

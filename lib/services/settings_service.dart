@@ -3,18 +3,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../l10n/app_strings.dart';
 
-/// Language settings: a primary language for the whole app, plus an optional
-/// second language shown under color names so kids can learn a new language.
-/// Defaults to English with no second language.
+/// User settings: a primary language for the whole app, an optional second
+/// language shown under color names so kids can learn a new language, and a
+/// single sound toggle covering music and effects together. Defaults to
+/// English, no second language, sound on.
 class SettingsService extends ChangeNotifier {
   static const _primaryKey = 'primary_lang';
   static const _secondaryKey = 'secondary_lang';
+  static const _soundEnabledKey = 'sound_enabled';
 
   String _primaryLang = 'en';
   String? _secondaryLang;
+  bool _soundEnabled = true;
 
   String get primaryLang => _primaryLang;
   String? get secondaryLang => _secondaryLang;
+  bool get soundEnabled => _soundEnabled;
   AppStrings get strings => appStringsFor(_primaryLang);
 
   bool get isRtl =>
@@ -28,8 +32,11 @@ class SettingsService extends ChangeNotifier {
     final primary = prefs.getString(_primaryKey);
     final secondary = prefs.getString(_secondaryKey);
     if (primary != null && _isSupported(primary)) _primaryLang = primary;
-    if (secondary != null && _isSupported(secondary)) _secondaryLang = secondary;
+    if (secondary != null && _isSupported(secondary)) {
+      _secondaryLang = secondary;
+    }
     if (_secondaryLang == _primaryLang) _secondaryLang = null;
+    _soundEnabled = prefs.getBool(_soundEnabledKey) ?? true;
     notifyListeners();
   }
 
@@ -54,5 +61,15 @@ class SettingsService extends ChangeNotifier {
     } else {
       await prefs.setString(_secondaryKey, code);
     }
+  }
+
+  Future<void> toggleSound() => setSoundEnabled(!_soundEnabled);
+
+  Future<void> setSoundEnabled(bool enabled) async {
+    if (_soundEnabled == enabled) return;
+    _soundEnabled = enabled;
+    notifyListeners();
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_soundEnabledKey, enabled);
   }
 }
