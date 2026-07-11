@@ -72,6 +72,12 @@ class _GameScreenState extends State<GameScreen> {
     } finally {
       _handlingPhase = false;
     }
+    // A handler can advance the phase synchronously (e.g. declining the revive
+    // moves reviveOffer -> gameOver); that notification is swallowed by the
+    // re-entrancy guard above, so re-check and handle the new phase here.
+    if (mounted && _controller.phase != phase) {
+      _onGameStateChanged();
+    }
   }
 
   /// Sounds follow the controller's phase so audio can never disagree with
